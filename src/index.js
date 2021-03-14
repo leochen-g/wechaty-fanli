@@ -16,6 +16,7 @@ async function fanli({msg}) {
         return '返利查询失败'
     } catch (e) {
         console.log('查询失败', e)
+        return '返利查询失败'
     }
 }
 
