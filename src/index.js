@@ -5,7 +5,7 @@ let config = {}
 async function fanli({msg}) {
     try {
         const htmlReg = /(<([^>]+)>)/ig
-        msg = msg.replace(htmlReg, '').replace(config.keyword, '')
+        msg = msg.replace(htmlReg, '*').replace(config.keyword, '')
         const taobao = new TaoBaoController({...config});
         const rgx = /\w{8,11}/;
         const pwd = msg.match(rgx);
