@@ -1,0 +1,46 @@
+{
+  "name": "wechaty-fanli",
+  "version": "0.1.2",
+  "description": "wechaty返利机器人插件",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node test/index.js",
+    "release": "verpub publish",
+    "release:dry": "verpub --dry-run"
+  },
+  "keywords": [
+    "微信返利机器人",
+    "微信返利插件",
+    "淘宝联盟",
+    "阿里妈妈",
+    "wechaty",
+    "wechaty-plugin"
+  ],
+  "author": {
+    "name": "Leo_chen",
+    "url": "http://www.xkboke.com",
+    "email": "leo.gengchen@foxmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gengchen528/wechaty-fanli"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  },
+  "readme": "README.md",
+  "dependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "superagent": "^5.2.2",
+    "tencentcloud-sdk-nodejs": "^4.0.30",
+    "wechaty": "^0.57.13",
+    "wechaty-puppet-padlocal": "^0.2.35"
+  },
+  "_id": "wechaty-fanli@0.1.2",
+  "_commitid": "8ff5248"
+}
