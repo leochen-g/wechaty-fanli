@@ -30,6 +30,7 @@ async function onMessage(msg) {
           console.log(`${await contact.name()}: 触发返利关键词"${config.keyword}"`)
           const res = await fanli({ msg: say })
           await msg.say(res)
+          return
         }
       } else {
         console.log('无关键词，全部触发返利')

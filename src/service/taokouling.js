@@ -35,8 +35,8 @@ class TKLService {
       }
       axios(config)
         .then(function (response) {
-          if (response.success) {
-            const data = response.url.split('?')
+          if (response.data.success) {
+            const data = response.data.url.split('?')
             const obj = data[1].split('&')
             let itemId = ''
             for (let i = 0; i < obj.length; i++) {
@@ -50,10 +50,10 @@ class TKLService {
               resolve(itemId)
             }
           }
-          reject('Check pwd error')
+          reject('Check pwd error' + response.data.msg)
         })
         .catch(function (error) {
-          reject('Check pwd error')
+          reject('Check pwd error' + error)
         })
       // request.get(url, { json: true }, (_err, _res, body) => {
       //   if (body && body.code === 0) {
@@ -85,7 +85,7 @@ class TKLService {
         if (body && body.result && body.result.data) {
           resolve(body.result.data)
         } else {
-          reject('Create link error')
+          reject('查询失败' + body.msg)
         }
       })
     })
