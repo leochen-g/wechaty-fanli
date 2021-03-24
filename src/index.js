@@ -10,7 +10,7 @@ async function fanli({ msg }) {
     const rgx = /\w{8,11}/
     const pwd = msg.match(rgx)
     if (pwd !== null) {
-      const res = await taobao.getInfo(`￥${pwd[0]}￥`)
+      const res = await taobao.getInfo(msg)
       return res
     }
     return '查询失败'
