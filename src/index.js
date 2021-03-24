@@ -4,16 +4,14 @@ let config = {}
 
 async function fanli({ msg }) {
   try {
-    const htmlReg = /(<([^>]+)>)/gi
-    msg = msg.replace(htmlReg, '*').replace(config.keyword, '')
     const taobao = new TaoBaoController({ ...config })
-    const rgx = /\w{8,11}/
-    const pwd = msg.match(rgx)
-    if (pwd !== null) {
-      const res = await taobao.getInfo(msg)
-      return res
-    }
-    return '查询失败'
+    // const rgx = /\w{8,11}/
+    // const pwd = msg.match(rgx)
+    // if (pwd !== null) {
+    const res = await taobao.getInfo(msg)
+    return res
+    // }
+    // return '查询失败'
   } catch (e) {
     console.log('查询失败', e)
     return '查询失败'
