@@ -4,7 +4,7 @@
  */
 
 const request = require('request')
-const axios = request('axios')
+const axios = require('axios')
 const FormData = require('form-data')
 class TKLService {
   constructor({ apiKey, siteId, adzoneId, uid }) {
