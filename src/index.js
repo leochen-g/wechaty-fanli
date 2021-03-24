@@ -23,6 +23,7 @@ async function onMessage(msg) {
     const room = msg.room() // 是否为群消息
     const contact = msg.talker() // 发消息人
     const msgSelf = msg.self() // 是否自己发给自己的消息
+    if (msgSelf) return
     if (!room) {
       const say = msg.text()
       if (config.keyword) {
@@ -30,7 +31,6 @@ async function onMessage(msg) {
           console.log(`${await contact.name()}: 触发返利关键词"${config.keyword}"`)
           const res = await fanli({ msg: say })
           await msg.say(res)
-          return
         }
       } else {
         console.log('无关键词，全部触发返利')
