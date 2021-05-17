@@ -40,8 +40,12 @@
     "qrcode-terminal": "^0.12.0",
     "superagent": "^5.2.2",
     "tencentcloud-sdk-nodejs": "^4.0.30",
-    "wechaty": "^0.57.13",
-    "wechaty-puppet-padlocal": "^0.2.35"
+    "wechaty": "^0.59.10",
+    "wechaty-puppet-padlocal": "^0.2.35",
+    "wechaty-puppet-wechat": "^0.28.1"
+  },
+  "peerDependencies": {
+    "wechaty": "^0.59.10"
   },
   "_id": "wechaty-fanli@0.1.14",
   "_commitid": "42e28b2"
