@@ -25,7 +25,7 @@
 ### 安装插件和wechaty
 
 ```angular2html
-npm install wechaty wechaty-fanli wechaty-puppet-padlocal --save
+npm install wechaty wechaty-fanli wechaty-puppet-wechat --save
 ```
 
 ### 主要代码
@@ -33,18 +33,18 @@ npm install wechaty wechaty-fanli wechaty-puppet-padlocal --save
 index.js
 ```javascript
 const {Wechaty} = require('wechaty')
-const {PuppetPadlocal} = require('wechaty-puppet-padlocal')
+//const {PuppetPadlocal} = require('wechaty-puppet-padlocal')
 const Qrterminal = require('qrcode-terminal')
 const WechatyFanliPlugin = require('wechaty-fanli')
-const token = '申请的ipadlocal token'
+// const token = '申请的ipadlocal token'
 const name = 'wechat-fanli'
-const puppet = new PuppetPadlocal({
-    token,
-})
+// const puppet = new PuppetPadlocal({
+//    token,
+//})
 const bot = new Wechaty({
     name, // generate xxxx.memory-card.json and save login data for the next login
-    puppet,
-    // puppet: 'wechaty-puppet-puppeteer',
+    //puppet,
+    puppet: 'wechaty-puppet-wechat',
 })
 
 
