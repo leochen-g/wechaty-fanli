@@ -1,6 +1,6 @@
 {
   "name": "wechaty-fanli",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "wechaty返利机器人插件",
   "main": "src/index.js",
   "scripts": {
@@ -46,6 +46,6 @@
   "peerDependencies": {
     "wechaty": "^0.59.10"
   },
-  "_id": "wechaty-fanli@0.1.17",
-  "_commitid": "525f391"
+  "_id": "wechaty-fanli@0.1.18",
+  "_commitid": "b6b10f2"
 }
