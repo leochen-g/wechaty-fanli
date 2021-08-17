@@ -53,8 +53,8 @@ class TKLService {
       const res = await axios(config)
       if (res.data.status === 'success') {
         const url = res.data.data.url
-        console.log('解析成功，正在转换商品id...')
-        return ''
+        console.log(`解析url成功: ${url}`)
+        return url
       }
     }catch (e) {
       console.log('电商工具解析错误,正在使用淘大象接口...')
@@ -82,7 +82,7 @@ class TKLService {
       const res = await axios(config)
       if (res.data.code === 0) {
         const url = res.data.data.url
-        console.log('解析成功，正在转换商品id...')
+        console.log(`解析url成功: ${url}`)
         return url
       }
     }catch (e) {
@@ -107,6 +107,7 @@ class TKLService {
         break
       }
     }
+    console.log(`解析得到商品id:${itemId}`)
     if (itemId) {
       return itemId
     } else {
@@ -122,7 +123,7 @@ class TKLService {
         if (body && body.result && body.result.data) {
           resolve(body.result.data)
         } else {
-          reject('查询失败' + body.msg)
+          reject('查询失败原因：' + body.msg)
         }
       })
     })

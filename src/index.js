@@ -5,16 +5,11 @@ let config = {}
 async function fanli({ msg }) {
   try {
     const taobao = new TaoBaoController({ ...config })
-    // const rgx = /\w{8,11}/
-    // const pwd = msg.match(rgx)
-    // if (pwd !== null) {
     const res = await taobao.getInfo(msg)
     return res
-    // }
-    // return '查询失败'
   } catch (e) {
     console.log('查询失败', e)
-    return '查询失败'
+    return `查询失败：\n\n ${e}`
   }
 }
 
