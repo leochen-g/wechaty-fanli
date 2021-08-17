@@ -16,66 +16,103 @@ class TKLService {
   /**
    * 淘口令解析
    */
-  check(text) {
-    return new Promise((resolve, reject) => {
-      // const url =  `http://api.taokouling.com/tkl/tkljm?apikey=${this.apiKey}&tkl=${encodeURI(text)}`
-      // const url = `https://taodaxiang.com/taopass/parse/get?&content=${encodeURI(text)}`
-      var data = new FormData()
-      data.append('kouling', text)
-      data.append('isitem', ' false')
-      data.append('isquan', ' false')
-      const config = {
-        method: 'post',
-        url: 'https://www.2017taoke.com/tool/kouling.html?submit',
-        headers: {
-          referer: 'https://www.2017taoke.com/tool/kouling.html',
-          ...data.getHeaders(),
-        },
-        data: data,
+  async check(text) {
+    let url= ''
+    const res1 = await this.getDianShang(text)
+    if(res1) {
+      url = res1
+      return this.getGoodId(url)
+    } else {
+      const res2 = await this.getDaXiang(text)
+      if(res2) {
+        url = res2
+        return this.getGoodId(url)
+      }else {
+        return ''
       }
-      axios(config)
-        .then(function (response) {
-          if (response.data.success) {
-            const data = response.data.url.split('?')
-            const obj = data[1].split('&')
-            let itemId = ''
-            for (let i = 0; i < obj.length; i++) {
-              const [key, value] = obj[i].split('=')
-              if (key === 'id') {
-                itemId = value
-                break
-              }
-            }
-            if (itemId) {
-              resolve(itemId)
-            }
-          }
-          reject('Check pwd error' + response.data.msg)
-        })
-        .catch(function (error) {
-          reject('Check pwd error' + error)
-        })
-      // request.get(url, { json: true }, (_err, _res, body) => {
-      //   if (body && body.code === 0) {
-      //     const data = body.data.url.split('?')
-      //     const obj = data[1].split('&')
-      //     let itemId = ''
-      //     for (let i = 0; i < obj.length; i++) {
-      //       const [key, value] = obj[i].split('=')
-      //       if (key === 'id') {
-      //         itemId = value
-      //         break
-      //       }
-      //     }
-      //     if (itemId) {
-      //       resolve(itemId)
-      //     }
-      //   }
-      //   reject('Check pwd error')
-      // })
-    })
+    }
   }
 
+  /**
+   * 淘口令解析 - 电商工具
+   */
+  async getDianShang(text) {
+    var data = new FormData()
+    data.append('tkl', text)
+    const config = {
+      method: 'post',
+      url: 'http://tool.taobaourl.cn/Index/doTkljm.html',
+      headers: {
+        referer: 'http://tool.taobaourl.cn/Index/doTkljm.html',
+        ...data.getHeaders(),
+      },
+      data: data,
+    }
+    try{
+      console.log('使用电商工具解析中...')
+      const res = await axios(config)
+      if (res.data.status === 'success') {
+        const url = res.data.data.url
+        console.log('解析成功，正在转换商品id...')
+        return ''
+      }
+    }catch (e) {
+      console.log('电商工具解析错误,正在使用淘大象接口...')
+      return  ''
+    }
+  }
+
+  /**
+   * 淘口令解析 - 淘大象
+   */
+  async getDaXiang(text) {
+    var data = new FormData()
+    data.append('content', text)
+    const config = {
+      method: 'post',
+      url: 'https://taodaxiang.com/taopass/parse/get',
+      headers: {
+        // referer: 'https://taodaxiang.com/taopass',
+        ...data.getHeaders(),
+      },
+      data: data,
+    }
+    try{
+      console.log('使用淘大象解析中...')
+      const res = await axios(config)
+      if (res.data.code === 0) {
+        const url = res.data.data.url
+        console.log('解析成功，正在转换商品id...')
+        return url
+      }
+    }catch (e) {
+      console.log('淘大象接口解析失败，请联系作者新增接口...')
+      return  ''
+    }
+  }
+
+  /**
+   * 获取商品id
+   * @param url
+   * @returns {string}
+   */
+  getGoodId(url) {
+    const data = url.split('?')
+    const obj = data[1].split('&')
+    let itemId = ''
+    for (let i = 0; i < obj.length; i++) {
+      const [key, value] = obj[i].split('=')
+      if (key === 'id') {
+        itemId = value
+        break
+      }
+    }
+    if (itemId) {
+      return itemId
+    } else {
+      return  ''
+    }
+  }
   /**
    * 高佣转链接
    */

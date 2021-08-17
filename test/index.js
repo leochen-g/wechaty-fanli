@@ -1,16 +1,10 @@
 const {Wechaty} = require('wechaty')
-const {PuppetPadlocal} = require('wechaty-puppet-padlocal')
 const Qrterminal = require('qrcode-terminal')
 const WechatyFanliPlugin = require('../src/index')
-const token = ''
 const name = 'wechat-assistant'
-const puppet = new PuppetPadlocal({
-    token,
-})
 const bot = new Wechaty({
     name, // generate xxxx.memory-card.json and save login data for the next login
-    puppet,
-    // puppet: 'wechaty-puppet-puppeteer',
+    puppet: 'wechaty-puppet-wechat',
 })
 
 
@@ -46,7 +40,7 @@ bot
         adzoneId: "", // 参见https://www.taokouling.com/html/8.html
         uid: '', // 淘口令网-高佣授权信息-淘宝用户id
         appKey: '', // 淘宝联盟 - 媒体备案管理- 媒体中的appkey
-        appSecret: 'appSecret' // 淘宝联盟 - 媒体备案管理- 媒体中的appkey - 查看 - appSecret
+        appSecret: '' // 淘宝联盟 - 媒体备案管理- 媒体中的appkey - 查看 - appSecret
     }))
     .start()
     .catch((e) => console.error(e))

@@ -25,3 +25,4 @@ pids
 */file
 npm-debug.log
 /yarn.lock
+*.template.js
